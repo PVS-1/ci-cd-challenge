@@ -3,11 +3,12 @@ name: Deploy Flask to Elastic Beanstalk
 on:
   push:
     branches:
-      - main
+    - main
     paths:
-      - "03-Deploy-Application-with-Elastic-Beanstalk-GitHub/**"
-      - ".github/workflows/03-deploy-elastic-beanstalk.yml"
+    - "03-Deploy-Application-with-Elastic-Beanstalk-GitHub/**"
+    - ".github/workflows/03-deploy-elastic-beanstalk.yml"
   workflow_dispatch:
+
 
 permissions:
   contents: read
@@ -16,20 +17,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Create deployment package
-        working-directory: 03-Deploy-Application-with-Elastic-Beanstalk-GitHub
-        run: zip -j deploy.zip application.py requirements.txt
+    - name: Create deployment package
+      working-directory: 03-Deploy-Application-with-Elastic-Beanstalk-GitHub
+      run: zip -j deploy.zip application.py requirements.txt
 
-      - name: Deploy to Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v22
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: cmtr-msdta2zd-app
-          environment_name: cmtr-msdta2zd-env
-          version_label: github-${{ github.sha }}
-          region: eu-west-1
-          deployment_package: 03-Deploy-Application-with-Elastic-Beanstalk-GitHub/deploy.zip
+    - name: Deploy to Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v22
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
+        application_name: cmtr-msdta2zd-app
+        environment_name: cmtr-msdta2zd-env
+        version_label: github-${{ github.sha }}
+        region: eu-west-1
+        deployment_package: 03-Deploy-Application-with-Elastic-Beanstalk-GitHub/deploy.zip
