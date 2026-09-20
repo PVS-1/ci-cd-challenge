@@ -111,12 +111,13 @@ echo "http://$CNAME"
 
 ```text
 ci-cd-challenge/
-├── application.py
-├── requirements.txt
+├── 03-Deploy-Application-with-Elastic-Beanstalk-GitHub/
+│   ├── application.py
+│   └── requirements.txt
 └── .github/workflows/03-deploy-elastic-beanstalk.yml
 ```
 
-Документація і Objective 1 script залишаються в `03-Deploy-Application-with-Elastic-Beanstalk-GitHub/`.
+Усі файли Task 3 залишаються в `03-Deploy-Application-with-Elastic-Beanstalk-GitHub/`.
 
 `application.py` повертає:
 
@@ -124,7 +125,7 @@ ci-cd-challenge/
 Hello from msdta2zd Elastic Beanstalk CI-CD
 ```
 
-Якщо challenge покаже інший `custom_identifier`, зміни рядок у `application.py` перед push.
+Якщо challenge покаже інший `custom_identifier`, зміни рядок у `03-Deploy-Application-with-Elastic-Beanstalk-GitHub/application.py` перед push.
 
 ## 4. Локально перевірити Flask
 
