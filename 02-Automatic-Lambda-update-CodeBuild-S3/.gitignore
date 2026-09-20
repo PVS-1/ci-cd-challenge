@@ -1,0 +1,5 @@
+build.zip
+trigger.zip
+lambda-response.json
+generated-policies/
+__pycache__/

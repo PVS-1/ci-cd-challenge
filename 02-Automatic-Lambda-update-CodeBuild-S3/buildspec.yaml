@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+    commands:
+    - python -m pip install --upgrade pip
+    - python -m pip install -r requirements.txt -t package
+  build:
+    commands:
+    - cp index.py package/index.py
+    - cd package && zip -r ../lambda.zip .
+    - cd ..
+    - aws lambda update-function-code --function-name cmtr-msdta2zd-lambda --zip-file fileb://lambda.zip
+
+artifacts:
+  files:
+  - lambda.zip
