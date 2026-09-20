@@ -107,16 +107,16 @@ echo "http://$CNAME"
 
 ## 3. Flask application
 
-Структура Task 3:
+Структура репозиторію для Elastic Beanstalk:
 
 ```text
-03-Deploy-Application-with-Elastic-Beanstalk-GitHub/
+ci-cd-challenge/
 ├── application.py
 ├── requirements.txt
-├── 01-create-environment.sh
-├── README.md
-└── .gitignore
+└── .github/workflows/03-deploy-elastic-beanstalk.yml
 ```
+
+Документація і Objective 1 script залишаються в `03-Deploy-Application-with-Elastic-Beanstalk-GitHub/`.
 
 `application.py` повертає:
 
