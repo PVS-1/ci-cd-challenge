@@ -14,7 +14,7 @@ on:
     branches:
       - main
     paths:
-      - "*.tf"
+      - "04-Automate-Deployment-Using-Terraform-GitHub/terraform-code/**"
       - ".github/workflows/04-terraform-deploy.yml"
   workflow_dispatch:
 
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: .
+        working-directory: 04-Automate-Deployment-Using-Terraform-GitHub/terraform-code
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
