@@ -3,11 +3,12 @@
 on:
   push:
     branches:
-      - main
+    - main
     paths:
-      - "04-Automate-Deployment-Using-Terraform-GitHub/terraform-code/**"
-      - ".github/workflows/04-terraform-deploy.yml"
+    - "*.tf"
+    - ".github/workflows/04-terraform-deploy.yml"
   workflow_dispatch:
+
 
 permissions:
   contents: read
@@ -17,27 +18,27 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: 04-Automate-Deployment-Using-Terraform-GitHub/terraform-code
+        working-directory: .
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: eu-west-1
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: eu-west-1
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform init
-        run: terraform init -input=false
+    - name: Terraform init
+      run: terraform init -input=false
 
-      - name: Terraform validate
-        run: terraform validate
+    - name: Terraform validate
+      run: terraform validate
 
-      - name: Terraform apply
-        run: terraform apply -auto-approve -input=false
+    - name: Terraform apply
+      run: terraform apply -auto-approve -input=false
