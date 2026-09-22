@@ -6,6 +6,7 @@ phases:
     - chmod +x scripts/*.sh
 
 artifacts:
+  base-directory: 10-Monitoring-and-Rollback-with-CloudWatch-and-CodeDeploy
   files:
   - app.py
   - requirements.txt
