@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+- source: /
+  destination: /opt/cmtr-msdta2zd-north-pole
+hooks:
+  BeforeInstall:
+  - location: scripts/stop_container.sh
+    timeout: 60
+    runas: root
+  AfterInstall:
+  - location: scripts/after_install.sh
+    timeout: 300
+    runas: root
+  ApplicationStart:
+  - location: scripts/start_container.sh
+    timeout: 60
+    runas: root

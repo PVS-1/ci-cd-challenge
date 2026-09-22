@@ -1,0 +1,37 @@
+{
+    "Version":  "2012-10-17",
+    "Statement":  [
+                      {
+                          "Effect":  "Allow",
+                          "Sid":  "ReadBuildSource",
+                          "Resource":  [
+                                           "arn:aws:s3:::cmtr-msdta2zd-bucket-1789917057",
+                                           "arn:aws:s3:::cmtr-msdta2zd-bucket-1789917057/*"
+                                       ],
+                          "Action":  [
+                                         "s3:GetObject",
+                                         "s3:GetObjectVersion",
+                                         "s3:ListBucket"
+                                     ]
+                      },
+                      {
+                          "Effect":  "Allow",
+                          "Sid":  "UpdateTargetLambda",
+                          "Resource":  "arn:aws:lambda:eu-west-1:911167901920:function:cmtr-msdta2zd-lambda",
+                          "Action":  [
+                                         "lambda:GetFunction",
+                                         "lambda:UpdateFunctionCode"
+                                     ]
+                      },
+                      {
+                          "Effect":  "Allow",
+                          "Sid":  "WriteCodeBuildLogs",
+                          "Resource":  "*",
+                          "Action":  [
+                                         "logs:CreateLogGroup",
+                                         "logs:CreateLogStream",
+                                         "logs:PutLogEvents"
+                                     ]
+                      }
+                  ]
+}

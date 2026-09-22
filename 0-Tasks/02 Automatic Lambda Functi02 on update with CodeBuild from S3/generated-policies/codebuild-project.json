@@ -1,0 +1,25 @@
+{
+    "serviceRole":  "arn:aws:iam::911167901920:role/cmtr-msdta2zd-cb",
+    "environment":  {
+                        "environmentVariables":  [
+                                                     {
+                                                         "type":  "PLAINTEXT",
+                                                         "name":  "TARGET_LAMBDA_NAME",
+                                                         "value":  "cmtr-msdta2zd-lambda"
+                                                     }
+                                                 ],
+                        "imagePullCredentialsType":  "CODEBUILD",
+                        "computeType":  "BUILD_GENERAL1_SMALL",
+                        "type":  "LINUX_CONTAINER",
+                        "image":  "aws/codebuild/standard:7.0"
+                    },
+    "name":  "cmtr-msdta2zd-cb-project",
+    "source":  {
+                   "buildspec":  "buildspec.yaml",
+                   "location":  "cmtr-msdta2zd-bucket-1789917057/build.zip",
+                   "type":  "S3"
+               },
+    "artifacts":  {
+                      "type":  "NO_ARTIFACTS"
+                  }
+}

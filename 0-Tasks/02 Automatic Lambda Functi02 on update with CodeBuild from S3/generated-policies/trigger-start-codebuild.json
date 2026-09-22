@@ -1,0 +1,11 @@
+{
+    "Version":  "2012-10-17",
+    "Statement":  [
+                      {
+                          "Effect":  "Allow",
+                          "Sid":  "StartCodeBuildProject",
+                          "Resource":  "arn:aws:codebuild:eu-west-1:911167901920:project/cmtr-msdta2zd-cb-project",
+                          "Action":  "codebuild:StartBuild"
+                      }
+                  ]
+}

@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+- source: /
+  destination: /opt/cmtr-msdta2zd-app
+hooks:
+  ApplicationStop:
+  - location: scripts/stop.sh
+    timeout: 30
+    runas: root
+  AfterInstall:
+  - location: scripts/install.sh
+    timeout: 180
+    runas: root
+  ApplicationStart:
+  - location: scripts/start.sh
+    timeout: 30
+    runas: root

@@ -1,0 +1,45 @@
+[CmdletBinding()]
+param(
+    [string]$OutputDirectory
+)
+
+$ErrorActionPreference = "Stop"
+if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
+    $OutputDirectory = Join-Path $PSScriptRoot "source"
+}
+
+$BuildspecPath = Join-Path $OutputDirectory "buildspec.yml"
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+$Buildspec = @'
+version: 0.2
+
+env:
+  variables:
+    PRIMARY_REGION: eu-west-1
+    SECONDARY_REGION: ap-south-1
+    STACK_NAME: cmtr-msdta2zd-r53-stack
+    PRIMARY_VPC_NAME: cmtr-msdta2zd-vpc-primary
+
+phases:
+  build:
+    commands:
+      - set -eu
+      - ZONE_NAME=$(aws ssm get-parameter --name /cmtr-msdta2zd/zone_name --region "$PRIMARY_REGION" --query 'Parameter.Value' --output text)
+      - RECORD_NAME=$(aws ssm get-parameter --name /cmtr-msdta2zd/app_name --region "$PRIMARY_REGION" --query 'Parameter.Value' --output text)
+      - PRIMARY_IP=$(aws ssm get-parameter --name /cmtr-msdta2zd/ec2_ip_primary --region "$PRIMARY_REGION" --query 'Parameter.Value' --output text)
+      - SECONDARY_IP=$(aws ssm get-parameter --name /cmtr-msdta2zd/ec2_ip_secondary --region "$SECONDARY_REGION" --query 'Parameter.Value' --output text)
+      - PRIMARY_VPC_ID=$(aws ec2 describe-vpcs --filters "Name=tag:Name,Values=$PRIMARY_VPC_NAME" --region "$PRIMARY_REGION" --query 'Vpcs[0].VpcId' --output text)
+      - test "$PRIMARY_VPC_ID" != "None"
+      - aws cloudformation deploy --stack-name "$STACK_NAME" --template-file template.yml --region "$PRIMARY_REGION" --parameter-overrides ZoneName="$ZONE_NAME" RecordName="$RECORD_NAME" PrimaryIp="$PRIMARY_IP" SecondaryIp="$SECONDARY_IP" PrimaryVpcId="$PRIMARY_VPC_ID" --no-fail-on-empty-changeset
+
+artifacts:
+  files:
+    - '**/*'
+'@
+
+New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
+[System.IO.File]::WriteAllText($BuildspecPath, $Buildspec, $Utf8NoBom)
+
+Write-Output "CodeBuild buildspec written: $BuildspecPath"
+Write-Output "Objective 3 complete. Buildspec retrieves SSM parameters and deploys the CloudFormation stack."

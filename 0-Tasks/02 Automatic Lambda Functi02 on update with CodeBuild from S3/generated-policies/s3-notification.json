@@ -1,0 +1,21 @@
+{
+    "LambdaFunctionConfigurations":  [
+                                         {
+                                             "LambdaFunctionArn":  "arn:aws:lambda:eu-west-1:911167901920:function:cmtr-msdta2zd-lambda-trigger",
+                                             "Events":  [
+                                                            "s3:ObjectCreated:*"
+                                                        ],
+                                             "Filter":  {
+                                                            "Key":  {
+                                                                        "FilterRules":  [
+                                                                                            {
+                                                                                                "Value":  ".zip",
+                                                                                                "Name":  "suffix"
+                                                                                            }
+                                                                                        ]
+                                                                    }
+                                                        },
+                                             "Id":  "cmtr-msdta2zd-event-trigger"
+                                         }
+                                     ]
+}

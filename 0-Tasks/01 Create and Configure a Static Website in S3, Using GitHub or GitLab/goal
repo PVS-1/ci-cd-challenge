@@ -1,0 +1,42 @@
+# Task 01: Static Website on Amazon S3
+
+## The Goal of the Task
+To create a static website in S3, deployed via a GitHub/GitLab pipeline.
+
+## Task Resources
+Region-specific resources must be created in the ${aws_region} region. For more details about regional services, see AWS Services by Region.
+
+In this task, you will work with the following resources:
+
+S3 Bucket ${bucket_name}: An S3 bucket to host a static website.
+IAM User: This IAM user will be used by Github/Gitlab pipelines.
+Github/Gitlab Repository: A repository for your website development.
+Github/Gitlab Access Token: An Access Token with read/write permissions to your repository.
+Github/Gitlab Pipeline: A pipeline for deploying your website to S3.
+## Objectives
+You must complete the following steps:
+
+Create an AWS S3 bucket ${bucket_name}, and configure it to host a static website with public access.
+Create an IAM user and grant the necessary privileges.
+Create a Github/Gitlab repository and push an index.html file to it.
+Create a Github/Gitlab Access Token with read/write permissions to your repository.
+Set up a Github/Gitlab pipeline that will deploy your website to S3.
+## Verification
+To verify that you have successfully completed the task:
+
+Ensure all resources are created with the correct configuration.
+Point your web browser to the S3 bucket's website endpoint to check whether the website is deployed and accessible.
+## Important Note
+Allow up to 3 minutes for your pipeline to complete and S3 synchronization.
+Attention! If you use GitHub to complete the task, don’t forget to delete the access_token that was created on GitHub for this task after you finish.
+
+## Deployment Time
+It takes up to 2 minutes to deploy task resources.
+
+
+
+Example repository URL (never commit credentials):
+
+```text
+https://github.com/<owner>/<repository>.git
+```

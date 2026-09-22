@@ -1,0 +1,23 @@
+# Local Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local environments
+.venv/
+venv/
+env/
+
+# Local credentials and secret material
+.env
+.env.*
+*.pem
+*.p12
+*.pfx
+credentials
+credentials.json
+
+# Temporary archives and local reports
+*.zip
+*.tmp
+*.log

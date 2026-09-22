@@ -1,0 +1,98 @@
+# Task 02: S3-Triggered Lambda Update with CodeBuild
+
+## Task description
+## Architecture
+CI/CD Pipeline Architecture
+The pipeline works as follows:
+
+Developer uploads updated Lambda code to S3 bucket Look into default Lambda code ${LambdaFunctionName} and when you will create your local files put this changes into index.py: "body": "Hello from Lambda, updated version!"
+S3 Event Notification triggers a Lambda function
+Lambda function starts a CodeBuild project
+AWS SDK Documentation for triggering CodeBuild:
+
+Python (Boto3) SDK - start_build
+JavaScript (AWS SDK v3) - StartBuildCommand
+Don't forget to add boto3 into requirements.txt 4. CodeBuild downloads source from S3, builds the package, and updates Lambda function
+
+## Pipeline Flow:
+## Step-by-Step Flow
+## The Goal of the Task
+To set up an automated CI/CD pipeline that deploys Lambda function updates using Amazon S3 as a trigger source and AWS CodeBuild as the build and deployment service.
+
+## Focus Tools
+Amazon S3
+Acts as artifact storage and trigger source
+AWS S3 Documentation
+AWS Lambda
+Trigger function that initiates CodeBuild builds
+Target function that gets updated with new code
+AWS Lambda Documentation
+AWS CodeBuild
+Managed build service that compiles and packages Lambda code
+Executes buildspec.yaml instructions
+AWS CodeBuild User Guide
+CodeBuild buildspec Reference
+## Important: Understanding CodeBuild
+
+CodeBuild is the core of this pipeline. It:
+Runs in a managed Docker container environment
+Executes commands defined in buildspec.yaml
+Has access to AWS SDK through IAM role
+Provides build logs in CloudWatch Logs
+Can update AWS resources (in this case, Lambda function)
+Learn more about CodeBuild Build Environment
+
+## Task Resources
+Before starting, you will have from CloudFormation:
+
+S3 bucket: ${bucket_name}
+Lambda function (hello-world): ${LambdaFunctionName}
+IAM role for hello-world Lambda: ${iam_role_lambda_cf}
+You will create manually:
+
+Lambda trigger function: ${LambdaFunctionTrigger}
+IAM role for CodeBuild: ${iam_role_cb}
+S3 Event Notification: ${event_notification_name}
+CodeBuild project: ${codebuild_project}
+## Objectives
+Prepare Code: Create index.py, requirements.txt, buildspec.yaml and package as build.zip
+Configure Lambda Trigger: Create Lambda function ${LambdaFunctionTrigger} that invokes CodeBuild start-build API, assign role ${iam_role_lambda_cf}. Important: Set timeout to 10 seconds (default 3 seconds is too short and will cause multiple retries)
+Setup S3 Events: Configure S3 Event Notification ${event_notification_name} on bucket ${bucket_name} to trigger ${LambdaFunctionTrigger} on object creation
+Create IAM Role: Manually create IAM role ${iam_role_cb} for CodeBuild with S3 read and Lambda update permissions
+Create CodeBuild Project: Configure project ${codebuild_project} with S3 source from ${bucket_name}, buildspec from artifact, and IAM role ${iam_role_cb}
+Test Pipeline: Upload build.zip to ${bucket_name} and verify end-to-end execution
+## Verification
+To verify that you have successfully completed the task:
+
+Ensure S3 bucket is created with Event Notifications enabled.
+Ensure Lambda trigger function is created and deployed.
+Ensure CodeBuild project is created with proper IAM role and buildspec configuration.
+Upload build.zip to S3 and verify CodeBuild build starts automatically.
+Verify Lambda function code is updated after CodeBuild completion.
+Check CloudWatch Logs for CodeBuild build output and any errors.
+## Deployment Time
+Deployment of task resources takes up to 2 minutes
+
+
+## Task Resources
+Before starting, you will have from CloudFormation:
+
+S3 bucket: cmtr-msdta2zd-bucket-1789917057
+Lambda function (hello-world): cmtr-msdta2zd-lambda
+IAM role for hello-world Lambda: cmtr-msdta2zd-lambda-cf
+You will create manually:
+
+Lambda trigger function: cmtr-msdta2zd-lambda-trigger
+IAM role for CodeBuild: cmtr-msdta2zd-cb
+S3 Event Notification: cmtr-msdta2zd-event-trigger
+CodeBuild project: cmtr-msdta2zd-cb-project
+
+
+## Objectives
+1 Prepare Code: Create index.py, requirements.txt, buildspec.yaml and package as build.zip
+
+2 Configure Lambda Trigger: Create Lambda function cmtr-msdta2zd-lambda-trigger that invokes CodeBuild start-build API, assign role4  cmtr-msdta2zd-lambda-cf. Important: Set timeout to 10 seconds (default 3 seconds is too short and will cause multiple retries)
+3 Setup S3 Events: Configure S3 Event Notification cmtr-msdta2zd-event-trigger on bucket cmtr-msdta2zd-bucket-1789917057 to trigger cmtr-msdta2zd-lambda-trigger on object creation
+4 Create IAM Role: Manually create IAM role cmtr-msdta2zd-cb for CodeBuild with S3 read and Lambda update permissions
+5 Create CodeBuild Project: Configure project cmtr-msdta2zd-cb-project with S3 source from cmtr-msdta2zd-bucket-1789917057, buildspec from artifact, and IAM role cmtr-msdta2zd-cb
+6 Test Pipeline: Upload build.zip to cmtr-msdta2zd-bucket-1789917057 and verify end-to-end execution
