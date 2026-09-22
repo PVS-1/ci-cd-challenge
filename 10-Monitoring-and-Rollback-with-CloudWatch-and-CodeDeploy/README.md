@@ -91,9 +91,9 @@ The initial release runs before alarm-gating is enabled because the pre-created 
 
 ## Verified Result
 
-The fresh pipeline execution `3da652e8-f3de-48a9-90bb-f768895ab0b0` completed with `Source`, `Build`, and `Deploy` all `Succeeded`.
+The fresh pipeline execution `fed27289-1a46-48f8-9207-8e9fc6d4eab5` completed with `Source`, `Build`, and `Deploy` all `Succeeded`. Its VPC-attached CodeBuild project used private subnets with NAT egress.
 
-The CodeDeploy blue/green deployment `d-K3RAHL8LL` completed successfully. The green target passed `/health` on port `8000`, and the ALB returned:
+The CodeDeploy blue/green deployment `d-QUR98O9LL` completed successfully. The green target passed `/health` on port `8000`, and the ALB returned:
 
 ```text
 Hello from the environment msdta2zd!
@@ -101,17 +101,17 @@ Hello from the environment msdta2zd!
 
 ### Automatic rollback test
 
-A controlled bad release made `/health` return HTTP 500. CloudWatch alarm `ALBUnhealthy` entered `ALARM`, stopping the bad deployment `d-7NMJJH9LL`.
+A controlled bad release made `/health` return HTTP 500. CloudWatch alarm `ALBUnhealthy` entered `ALARM`, stopping the bad deployment `d-HDLK36ALL` with error code `ALARM_ACTIVE`.
 
-CodeDeploy then created automatic rollback deployment `d-EJ0MWS9LL`:
+CodeDeploy then created automatic rollback deployment `d-1DBZDW9LL`:
 
 ```text
 Creator: codeDeployRollback
 Status: Succeeded
-rollbackTriggeringDeploymentId: d-7NMJJH9LL
+rollbackTriggeringDeploymentId: d-HDLK36ALL
 ```
 
-The application returned to a healthy fleet and the healthy source was restored in Git commit `ab7ebde`.
+The rollback restored the latest successful application artifact. The repository source was then restored to a healthy `/health` endpoint for subsequent development; do not start another deployment before submitting the lab, so the rollback artifact remains the verifier's latest successful revision.
 
 ## Azure Equivalent
 
