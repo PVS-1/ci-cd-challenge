@@ -11,7 +11,7 @@ def index():
 
 @app.get("/health")
 def health():
-    return {"status": "rollback-test"}, 500
+    return {"status": "healthy"}
 
 
 if __name__ == "__main__":
