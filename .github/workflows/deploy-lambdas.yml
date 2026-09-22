@@ -1,0 +1,40 @@
+name: Deploy Lambda functions
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - 'lambdas/**'
+    - '.github/workflows/deploy-lambdas.yml'
+  workflow_dispatch:
+
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ secrets.AWS_REGION }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Package and deploy Lambda functions
+      shell: bash
+      run: |
+        set -euo pipefail
+        for function_name in \
+          cmtr_msdta2zd_lambda_createOrder \
+          cmtr_msdta2zd_lambda_reserveStock \
+          cmtr_msdta2zd_lambda_sendNotification; do
+          zip -q -r "$function_name.zip" "lambdas/$function_name"
+          aws lambda update-function-code \
+            --function-name "$function_name" \
+            --zip-file "fileb://$function_name.zip" \
+            --publish
+        done
