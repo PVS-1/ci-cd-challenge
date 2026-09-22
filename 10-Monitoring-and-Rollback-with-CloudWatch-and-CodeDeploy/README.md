@@ -99,6 +99,46 @@ The CodeDeploy blue/green deployment `d-K3RAHL8LL` completed successfully. The g
 Hello from the environment msdta2zd!
 ```
 
+### Automatic rollback test
+
+A controlled bad release made `/health` return HTTP 500. CloudWatch alarm `ALBUnhealthy` entered `ALARM`, stopping the bad deployment `d-7NMJJH9LL`.
+
+CodeDeploy then created automatic rollback deployment `d-EJ0MWS9LL`:
+
+```text
+Creator: codeDeployRollback
+Status: Succeeded
+rollbackTriggeringDeploymentId: d-7NMJJH9LL
+```
+
+The application returned to a healthy fleet and the healthy source was restored in Git commit `ab7ebde`.
+
+## Azure Equivalent
+
+The closest Azure implementation uses the following services:
+
+| AWS implementation | Azure equivalent |
+| --- | --- |
+| GitHub source action + CodePipeline | Azure DevOps Pipeline or GitHub Actions |
+| CodeBuild | Azure Pipelines build job or GitHub Actions runner |
+| CodeDeploy blue/green EC2 fleet | Azure Container Apps revisions with traffic splitting, or App Service deployment slots |
+| ALB target group health check | Container Apps/App Service health probe, optionally Azure Front Door or Application Gateway probe |
+| CloudWatch `ALBUnhealthy` | Azure Monitor metric alert on failed health probes or unavailable replicas |
+| CodeDeploy alarm rollback | Revision traffic shift back to the prior revision, or App Service slot swap-back |
+| S3 artifact bucket | Pipeline artifact storage or Azure Blob Storage |
+| IAM instance/service roles | Managed Identity and Azure RBAC |
+
+For a containerized API, Azure Container Apps is the closest operational match:
+
+1. Build and publish the image to Azure Container Registry.
+2. Deploy a new Container Apps revision with `0%` traffic.
+3. Wait for its health probe to pass.
+4. Shift traffic progressively or directly to the new revision.
+5. Azure Monitor evaluates availability/health alerts.
+6. On an alert, route traffic back to the prior healthy revision.
+
+Use Managed Identity for registry, Key Vault, and telemetry access; do not place credentials in pipeline variables or application source.
+
 ## Verification
 
 ```powershell
