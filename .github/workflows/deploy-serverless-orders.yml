@@ -1,11 +1,11 @@
-name: Deploy Lambda functions
+name: Deploy Serverless Order Processing
 
 on:
   push:
     branches: [ main ]
     paths:
     - 'lambdas/**'
-    - '.github/workflows/deploy-lambdas.yml'
+    - '.github/workflows/deploy-serverless-orders.yml'
   workflow_dispatch:
 
 
@@ -13,7 +13,8 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  deploy-lambda-functions:
+    name: Package and deploy order-processing Lambda functions
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -23,6 +24,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
 
     - name: Package and deploy Lambda functions
       shell: bash
