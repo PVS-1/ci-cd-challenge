@@ -55,12 +55,15 @@ Push to GitHub
 
 Create GitHub repository with application files and appspec.yml
 Push code to main branch
-Configure AWS CodeDeploy
+
+## Configure AWS CodeDeploy
 
 Create IAM service role with appropriate permissions
 Create CodeDeploy application and deployment group
-Configure blue/green deployment settings
-Deploy Application
+
+## Configure blue/green deployment settings
+
+## Deploy Application
 
 Create deployment in CodeDeploy
 Monitor all 4 deployment stages
@@ -93,7 +96,8 @@ AppSpec Lifecycle Hooks Reference
 CodeDeploy Blue/Green Deployments
 AWS IAM Service Roles
 Flask Documentation
-Deploy Time
+
+## Deploy Time
 Deployment of task resources takes approximately 5 minutes.
 
 ## Theory: components and purpose

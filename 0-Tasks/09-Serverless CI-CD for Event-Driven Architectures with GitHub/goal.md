@@ -64,7 +64,7 @@ When configuring cmtr_msdta2zd_lambda_reserveStock and cmtr_msdta2zd_lambda_send
   "Payload.$": "$"
 }
 
-Create a new GitHub or GitLab repository.
+## Create a new GitHub or GitLab repository.
 
 Commit and push the extracted Lambda functions code to the main branch.
 
@@ -77,13 +77,13 @@ lambdas/
     cmtr_msdta2zd_lambda_sendNotification/
         handler.py
 
-Configure a CI/CD pipeline that automatically updates Lambda functions on every push to the main branch.
+## Configure a CI/CD pipeline that automatically updates Lambda functions on every push to the main branch.
 
-Configure repository secrets for AWS authentication. GitHub / GitLab variables: - AWS_REGION - AWS_ACCESS_KEY_ID - AWS_SECRET_ACCESS_KEY
+## Configure repository secrets for AWS authentication. GitHub / GitLab variables: - AWS_REGION - AWS_ACCESS_KEY_ID - AWS_SECRET_ACCESS_KEY
 
 Note: To obtain the required credentials, create a new IAM user with appropriate permissions to manage the AWS resources used in this task. Generate an access key for the user and use its credentials as the repository secret values above.
 
-Create a deploy/access token with permission to push changes to the repository
+## Create a deploy/access token with permission to push changes to the repository
 
 Provide the deploy/access token for task verification.
 ## Verification

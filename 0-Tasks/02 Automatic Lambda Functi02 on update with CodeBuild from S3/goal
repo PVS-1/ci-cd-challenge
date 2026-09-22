@@ -24,7 +24,8 @@ Amazon S3
 Acts as artifact storage and trigger source
 AWS S3 Documentation
 AWS Lambda
-Trigger function that initiates CodeBuild builds
+
+## Trigger function that initiates CodeBuild builds
 Target function that gets updated with new code
 AWS Lambda Documentation
 AWS CodeBuild
@@ -55,8 +56,10 @@ IAM role for CodeBuild: ${iam_role_cb}
 S3 Event Notification: ${event_notification_name}
 CodeBuild project: ${codebuild_project}
 ## Objectives
-Prepare Code: Create index.py, requirements.txt, buildspec.yaml and package as build.zip
-Configure Lambda Trigger: Create Lambda function ${LambdaFunctionTrigger} that invokes CodeBuild start-build API, assign role ${iam_role_lambda_cf}. Important: Set timeout to 10 seconds (default 3 seconds is too short and will cause multiple retries)
+
+## Prepare Code: Create index.py, requirements.txt, buildspec.yaml and package as build.zip
+
+## Configure Lambda Trigger: Create Lambda function ${LambdaFunctionTrigger} that invokes CodeBuild start-build API, assign role ${iam_role_lambda_cf}. Important: Set timeout to 10 seconds (default 3 seconds is too short and will cause multiple retries)
 Setup S3 Events: Configure S3 Event Notification ${event_notification_name} on bucket ${bucket_name} to trigger ${LambdaFunctionTrigger} on object creation
 Create IAM Role: Manually create IAM role ${iam_role_cb} for CodeBuild with S3 read and Lambda update permissions
 Create CodeBuild Project: Configure project ${codebuild_project} with S3 source from ${bucket_name}, buildspec from artifact, and IAM role ${iam_role_cb}

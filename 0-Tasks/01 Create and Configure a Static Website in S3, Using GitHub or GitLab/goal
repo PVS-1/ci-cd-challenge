@@ -16,11 +16,15 @@ Github/Gitlab Pipeline: A pipeline for deploying your website to S3.
 ## Objectives
 You must complete the following steps:
 
-Create an AWS S3 bucket ${bucket_name}, and configure it to host a static website with public access.
-Create an IAM user and grant the necessary privileges.
-Create a Github/Gitlab repository and push an index.html file to it.
-Create a Github/Gitlab Access Token with read/write permissions to your repository.
-Set up a Github/Gitlab pipeline that will deploy your website to S3.
+## Create an AWS S3 bucket ${bucket_name}, and configure it to host a static website with public access.
+
+## Create an IAM user and grant the necessary privileges.
+
+## Create a Github/Gitlab repository and push an index.html file to it.
+
+## Create a Github/Gitlab Access Token with read/write permissions to your repository.
+
+## Set up a Github/Gitlab pipeline that will deploy your website to S3.
 ## Verification
 To verify that you have successfully completed the task:
 

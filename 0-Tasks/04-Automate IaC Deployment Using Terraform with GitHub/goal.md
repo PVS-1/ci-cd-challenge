@@ -15,10 +15,13 @@ You must complete the following steps:
 Open the provided Amazon S3 bucket cmtr-msdta2zd-bucket-cicd-tf-20260921080119 created for this task.
 Download the Terraform archive from the bucket.
 Extract the archive locally.
-Create a new GitHub or GitLab repository.
+
+## Create a new GitHub or GitLab repository.
 Commit and push the extracted Terraform code to the main branch.
-Configure a CI/CD pipeline that automatically executes terraform init and terraform apply on every push to the main branch.
-Create a deploy/access token with permission to push changes to the repository
+
+## Configure a CI/CD pipeline that automatically executes terraform init and terraform apply on every push to the main branch.
+
+## Create a deploy/access token with permission to push changes to the repository
 Provide the deploy/access token for task verification.
 ## Verification
 The task is considered successfully completed if every push to the main branch automatically triggers the CI/CD pipeline and applies infrastructure changes using Terraform.

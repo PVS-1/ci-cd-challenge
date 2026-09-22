@@ -15,7 +15,8 @@ ElasticBeanstalkServiceRole a service role for Beanstalk with necessary permissi
 Beanstalk environment ${env} the environment for web application.
 Beanstalk application ${app} a sample web application.
 S3 Bucket ${s3_name} an automatically created bucket for Beanstalk environment.
-Create a Flask Application for Your Repository
+
+## Create a Flask Application for Your Repository
 Simple Flask application to be deployed must follow the required directory structure.
 Example: The following shows the recommended Git repository directory structure for the Flask application:
 Repo_name/
@@ -44,11 +45,16 @@ Hello from ${custom_identifier} Elastic Beanstalk CI-CD
 You must complete the following steps:
 
 Create AWS Elastic Beanstalk environment for web application, named ${env}.
-Create a sample web application, named ${app}.
-Create a simple Flask application that runs on the Python platform.
-Create a Github or Gitlab repository and push simple Flask repo to it.
-Create a Github or Gitlab Access Token with read/write permissions to your repository.
-Set up a Github or Gitlab pipeline that will deploy your website to AWS Elastic Beanstalk.
+
+## Create a sample web application, named ${app}.
+
+## Create a simple Flask application that runs on the Python platform.
+
+## Create a Github or Gitlab repository and push simple Flask repo to it.
+
+## Create a Github or Gitlab Access Token with read/write permissions to your repository.
+
+## Set up a Github or Gitlab pipeline that will deploy your website to AWS Elastic Beanstalk.
 ## Verification
 To verify that you have successfully completed the task:
 

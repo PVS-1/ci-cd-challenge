@@ -27,12 +27,15 @@ GitLab Project (Fork): Fork of the sample repository that hosts your pipeline an
 ## Objectives
 You must complete the following steps:
 
-Create an Amazon ECR repository named cmtr-msdta2zd-static.
+## Create an Amazon ECR repository named cmtr-msdta2zd-static.
 Fork the repository https://gitlab.com/cmtr/module_aws_typ2_gitlab-cicd to your personal GitLab account.
 In your fork, create a GitLab pipeline (.gitlab-ci.yml) that builds and pushes the Docker image to cmtr-msdta2zd-static.
-Create an Amazon ECS cluster cmtr-msdta2zd-cluster using the Fargate launch type.
-Create a Lambda function cmtr-msdta2zd-function that deploys the latest image from cmtr-msdta2zd-static to cmtr-msdta2zd-cluster upon EventBridge trigger.
-Create an EventBridge rule cmtr-msdta2zd-rule that invokes cmtr-msdta2zd-function when a new image is pushed to cmtr-msdta2zd-static.
+
+## Create an Amazon ECS cluster cmtr-msdta2zd-cluster using the Fargate launch type.
+
+## Create a Lambda function cmtr-msdta2zd-function that deploys the latest image from cmtr-msdta2zd-static to cmtr-msdta2zd-cluster upon EventBridge trigger.
+
+## Create an EventBridge rule cmtr-msdta2zd-rule that invokes cmtr-msdta2zd-function when a new image is pushed to cmtr-msdta2zd-static.
 Create IAM Policies and Roles with least privilege permissions for Lambda function execution, EventBridge rule and ECS task execution
 Important: When authenticating to Amazon ECR in your GitLab pipeline, always use docker login with an ECR authentication token. Do not use direct aws ecr CLI commands with AWS credentials to push images. Follow best practices and place the ECR password into a pipeline environment variable. The recommended approach is:
 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY_URL}
@@ -42,8 +45,9 @@ TThis ensures proper authentication and follows Docker best practices for CI/CD 
 Manual Testing
 Before submitting for automated verification, you should manually test your entire pipeline to ensure everything works as expected.
 
-Test 1: Verify Pipeline Execution
-Trigger the pipeline:
+### Test 1: Verify Pipeline Execution
+
+## Trigger the pipeline:
 
 Go to your GitLab repository.
 Click CI/CD → Pipelines in the left sidebar.
@@ -65,7 +69,8 @@ Check for success:
 Both stages should show green checkmarks (✓)
 Pipeline status should be passed
 Total execution time: typically 2-5 minutes
-Test 2: Verify ECR Repository
+
+### Test 2: Verify ECR Repository
 Navigate to ECR:
 
 Go to AWS Console → ECR.
@@ -81,7 +86,8 @@ Image URI: Should match your repository
 Pushed at: Recent timestamp
 Image size: Appropriate size for your application
 Vulnerability scan: May show scan results if enabled
-Test 3: Verify EventBridge and Lambda
+
+### Test 3: Verify EventBridge and Lambda
 Check EventBridge rule:
 
 Go to AWS Console → EventBridge.
@@ -107,7 +113,8 @@ Verify no errors:
 Logs should not contain error messages
 Status code should be 200
 Look for: "message": "Service updated successfully"
-Test 4: Verify ECS Deployment
+
+### Test 4: Verify ECS Deployment
 Navigate to ECS cluster:
 
 Go to AWS Console → ECS.
@@ -139,7 +146,8 @@ In the task details, verify:
 Task Definition: Should show latest revision
 Image: Should match your ECR repository URI with recent tag
 Last status: Should be RUNNING
-Test 5: Access the Deployed Application
+
+### Test 5: Access the Deployed Application
 Get the public IP address:
 
 In the ECS task details, find the Public IP address.
@@ -168,7 +176,7 @@ and a Personal Access Token (PAT) for the project with the following permissions
 
 Verification initiates the pipeline and waits for the verification code to become available online. It will also check your infrastructure setup; if the names of the deployed resources do not match the expected values, verification will fail.
 
-Prerequisites for Verification
+## Prerequisites for Verification
 Ensure you have the following information ready:
 
 GitLab Project ID:
@@ -184,7 +192,7 @@ The automated verification system will:
 
 Add a verification file to your repository:
 
-Create a file with a unique verification code
+## Create a file with a unique verification code
 Commit the file to trigger your pipeline
 Wait for pipeline completion:
 

@@ -18,8 +18,9 @@ Parameter Management: Retrieve hosted zone names and record values from AWS Syst
 Focus Tool
 Multi-region failover architecture ensures application continuity by dynamically routing traffic based on the health of endpoints:
 
-Primary Region: Active environment associated with the primary failover record
-Secondary Region: Standby environment associated with the secondary failover record, used when the primary endpoint is unhealthy
+### Primary Region: Active environment associated with the primary failover record
+
+### Secondary Region: Standby environment associated with the secondary failover record, used when the primary endpoint is unhealthy
 Private Hosted Zone: Limits DNS resolution to resources within the associated VPC
 Health Checks: Evaluate endpoint availability and control DNS failover based on health check status
 ## Task Resources
@@ -53,24 +54,29 @@ Complete the following steps in order:
 
 Initialize Source Control
 
-Create the CodeCommit repository cmtr-msdta2zd-repo
-Prepare and push template.yml and buildspec.yml to the main branch
+## Create the CodeCommit repository cmtr-msdta2zd-repo
+
+## Prepare and push template.yml and buildspec.yml to the main branch
 Develop CloudFormation Template
 
 Define a Private Hosted Zone associated with cmtr-msdta2zd-vpc-primary
-Configure an HTTP Health Check for the primary EC2 endpoint
+
+## Configure an HTTP Health Check for the primary EC2 endpoint
 Implement Failover A-records for Primary and Secondary servers
-Configure Build Orchestration
+
+## Configure Build Orchestration
 
 Write buildspec.yml to retrieve SSM parameters from both regions (zone name, record name, EC2 IPs, VPC ID)
 Use aws cloudformation deploy to create or update the stack
 Establish Security & Build
 
-Create an IAM role with least-privilege permissions (no AdministratorAccess)
-Configure and run the CodeBuild project cmtr-msdta2zd-codebuild
-Create a CI/CD Pipeline
+## Create an IAM role with least-privilege permissions (no AdministratorAccess)
 
-Create an AWS CodePipeline cmtr-msdta2zd-pipeline that:
+## Configure and run the CodeBuild project cmtr-msdta2zd-codebuild
+
+## Create a CI/CD Pipeline
+
+## Create an AWS CodePipeline cmtr-msdta2zd-pipeline that:
 Uses cmtr-msdta2zd-repo (branch main) as the Source stage
 Uses cmtr-msdta2zd-codebuild as the Build stage
 Verify that a new commit to main automatically triggers the pipeline

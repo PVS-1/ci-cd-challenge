@@ -62,12 +62,18 @@ You must configure a complete CI/CD pipeline with monitoring and automatic rollb
 
 Create Flask Application and Configuration Files: Flask application with buildspec.yml for CodeBuild, appspec.yml for CodeDeploy, and lifecycle hooks scripts (start, stop, install dependencies)
 Create GitHub Repository: that stores application code and deployment configuration
-Create a CodePipeline that integrates GitHub as the source, CodeBuild for building, and CodeDeploy for deployment
-Configure IAM permissions to allow pipeline components to communicate with each other
-Trigger a new pipeline execution to verify the permissions are correctly configured
-Create a CloudWatch alarm to monitor unhealthy hosts in the Application Load Balancer target group
-Configure the CodeDeploy deployment group to retain old instances and enable automatic rollback based on the CloudWatch alarm
-Deploy a new version of your application through the pipeline
+
+## Create a CodePipeline that integrates GitHub as the source, CodeBuild for building, and CodeDeploy for deployment
+
+## Configure IAM permissions to allow pipeline components to communicate with each other
+
+## Trigger a new pipeline execution to verify the permissions are correctly configured
+
+## Create a CloudWatch alarm to monitor unhealthy hosts in the Application Load Balancer target group
+
+## Configure the CodeDeploy deployment group to retain old instances and enable automatic rollback based on the CloudWatch alarm
+
+## Deploy a new version of your application through the pipeline
 Test automatic rollback by disrupting the application and observing the rollback process
 Your application main page must contains the next string for verification:
 Hello from the environment msdta2zd!
